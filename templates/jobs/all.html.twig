@@ -1,6 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1 class="mt-5">All jobs</h1>
+    <div class="row">
+        <div class="col-md-12 wrapper">
+            <h1>Všechny pozice ve firmě xxx</h1>
+            <small class="text-muted">Zobrazeno {{ jobsCollection.entriesFrom}} až {{ jobsCollection.entriesTo }} inzerátů z {{ jobsCollection.total }}</small>
+            {% for job in jobsCollection.jobs %}
+                {# @var job App\Integrations\Recruitis\DataObject\Jobs\Job #}
+                <div class="job-card">
+                    <h2>{{ job.title}}</h2>
+                    {% for address in job.addresses %}<span class="tag icon-address">{{ address.city }}</span>{% endfor %}
+                    {% for workfield in job.workfields %}<span class="tag icon-work">{{ workfield.name }}</span>{% endfor %}
+                    <span class="tag icon-tag">{{ job.suitableForString }}</span>
+                    {% if job.salary is not null %}
+                        <span class="tag icon-salary">{{ job.salary.min|number_format(0,' ', ',') }}&nbsp;&ndash;&nbsp;{{ job.salary.max|number_format(0,',', ' ') }} {{ job.salary.currency }} / {{ job.salary.unit }}</span>
+                    {% endif %}
+                    {% if job.education is not null %}
+                        <span class="tag icon-education">{{ job.education.name }}</span>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
 
 
 {% endblock %}

@@ -1,0 +1,44 @@
+.job-card {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  h2  {
+    font-size: medium;
+  }
+  .tag {
+    display: inline-flex;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 3px;
+    margin: 2px;
+    font-size: small;
+    &:before {
+      font-family: "Bootstrap Icons";
+      margin-right: 2px;
+      content: "\F5B0";
+    }
+    &.icon-address {
+      &:before {
+        content: "\F47F";
+      }
+    }
+    &.icon-education {
+      &:before {
+        content: "\F6FE";
+      }
+    }
+    &.icon-salary {
+      &:before {
+        content: "\F638";
+      }
+    }
+
+
+
+
+  }
+
+}

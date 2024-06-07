@@ -1,0 +1,17 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-icons/font/bootstrap-icons.scss";
+
+@font-face {
+  font-family: "Bootstrap Icons";
+  src: url('~bootstrap-icons/font/fonts/bootstrap-icons.woff2') format('woff2'),
+       url('~bootstrap-icons/font/fonts/bootstrap-icons.woff') format('woff');
+}
+
+.container {
+  background-color: #B4BEC9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.wrapper {
+    background-color: #DEEFE7;
+}
+
