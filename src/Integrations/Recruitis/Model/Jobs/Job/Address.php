@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Integrations\Recruitis\DataObject\Jobs\Job;
+namespace App\Integrations\Recruitis\Model\Jobs\Job;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 class Address
 {

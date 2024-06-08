@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Integrations\Recruitis\DataObject;
+namespace App\Integrations\Recruitis\Model;
 
 class EnumItem
 {

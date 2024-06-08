@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Integrations\Recruitis\DataObject\Jobs;
+namespace App\Integrations\Recruitis\Model\Jobs;
 
-use App\Integrations\Recruitis\DataObject\EnumItem;
-use App\Integrations\Recruitis\DataObject\Jobs\Job\Address;
-use App\Integrations\Recruitis\DataObject\Jobs\Job\Salary;
+use App\Integrations\Recruitis\Model\EnumItem;
+use App\Integrations\Recruitis\Model\Jobs\Job\Address;
+use App\Integrations\Recruitis\Model\Jobs\Job\Salary;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 use Symfony\Component\Serializer\Attribute\SerializedPath;
 

@@ -1,39 +1,39 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Integrations\Recruitis\DataObject\Jobs\Job;
+namespace App\Integrations\Recruitis\Model\Jobs\Job;
 
 class Salary
 {
-    private int $min;
-    private int $max;
-    private string $currency;
-    private string $unit;
-    private bool $visible;
+    private ?float $min = null;
+    private ?float $max = null;
+    private ?string $currency = null;
+    private ?string $unit = null;
+    private ?bool $visible = null;
 
-    public function getMin(): int
+    public function getMin(): ?float
     {
         return $this->min;
     }
 
-    public function setMin(int $min): Salary
+    public function setMin(float $min): Salary
     {
         $this->min = $min;
         return $this;
     }
 
-    public function getMax(): int
+    public function getMax(): ?float
     {
         return $this->max;
     }
 
-    public function setMax(int $max): Salary
+    public function setMax(float $max): Salary
     {
         $this->max = $max;
         return $this;
     }
 
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -44,7 +44,7 @@ class Salary
         return $this;
     }
 
-    public function getUnit(): string
+    public function getUnit(): ?string
     {
         return $this->unit;
     }
@@ -55,7 +55,7 @@ class Salary
         return $this;
     }
 
-    public function isVisible(): bool
+    public function isVisible(): ?bool
     {
         return $this->visible;
     }

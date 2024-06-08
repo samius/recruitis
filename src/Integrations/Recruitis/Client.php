@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Integrations\Recruitis;
 
-use App\Integrations\Recruitis\DataObject\Jobs\JobCollection;
+use App\Integrations\Recruitis\Model\Jobs\JobCollection;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
 use Psr\Cache\CacheItemInterface;
@@ -23,7 +23,10 @@ class Client
     {
         $response = $this->get('jobs', ['page' => $page, 'limit' => $limit]);
 
-        return $this->serializer->deserialize($response, JobCollection::class, 'json');
+        $collection = $this->serializer->deserialize($response, JobCollection::class, 'json');
+        $collection->setShowPerPage($limit);
+
+        return $collection;
     }
 
     private function get(string $path, array $query): string
@@ -54,7 +57,7 @@ class Client
 
     private function getCacheKey(string $method, string $path, array $config): string
     {
-        return sha1($method . $path . serialize($config));
+        return sha1(self::$BASE_URL . $path . $method . serialize($config));
     }
 
     private function getRequestHeaders(): array

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Integrations\Recruitis\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -12,10 +13,11 @@ use Symfony\Component\Routing\Attribute\Route;
 class JobsController extends AbstractController
 {
     #[Route('/', 'jobs_all', methods: ['GET'])]
-    public function all(Client $recruitisClient): Response
+    public function all(Request $request, Client $recruitisClient): Response
     {
-        $jobsCollection = $recruitisClient->getAllJobs();
+        $page = $request->query->get('page', 1);
+        $jobsCollection = $recruitisClient->getAllJobs($page);
 
-        return $this->render('jobs/all.html.twig', ['jobsCollection'=>$jobsCollection]);
+        return $this->render('jobs/all.html.twig', ['jobs'=>$jobsCollection]);
     }
 }
