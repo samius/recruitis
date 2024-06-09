@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12 wrapper">
             <h1>Pozice ve firmě International Contract Agency</h1>
-            <small class="text-muted">Zobrazeno {{ jobs.entriesFrom}} až {{ jobs.entriesTo }} inzerátů z {{ jobs.total }}</small>
+            <small class="text-muted">Zobrazeno {{ jobs.entriesFrom}} až {{ jobs.entriesTo }} inzerátů z {{ jobs.totalEntries}}</small>
             <div class="list">
                 {% for job in jobs.items %}
                     {# @var \App\Integrations\Recruitis\DataObject\Jobs\Job job #}

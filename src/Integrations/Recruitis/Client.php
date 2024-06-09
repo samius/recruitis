@@ -5,6 +5,7 @@ namespace App\Integrations\Recruitis;
 
 use App\Integrations\Recruitis\Model\Jobs\JobCollection;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use Psr\Cache\CacheItemInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -19,15 +20,15 @@ class Client
     {
     }
 
-    public function getAllJobs($page = 0, $limit = 10): JobCollection
+    public function getAllJobs($page = 1, $limit = 10): JobCollection
     {
         $response = $this->get('jobs', ['page' => $page, 'limit' => $limit]);
 
-        $collection = $this->serializer->deserialize($response, JobCollection::class, 'json');
-        $collection->setShowPerPage($limit);
-
-        return $collection;
+        return $this->serializer->deserialize($response, JobCollection::class, 'json');
     }
+
+
+
 
     private function get(string $path, array $query): string
     {
@@ -50,7 +51,12 @@ class Client
     {
         $config['headers'] = $this->getRequestHeaders();
 
-        $response = $this->httpClient->request($method, self::$BASE_URL . $path, $config);
+        try {
+            $response = $this->httpClient->request($method, self::$BASE_URL . $path, $config);
+        } catch (GuzzleException $e) {
+            throw ClientException::createFromHttpCode($e->getCode(), $e->getMessage());
+        }
+
         return $response->getBody()->getContents();
     }
 

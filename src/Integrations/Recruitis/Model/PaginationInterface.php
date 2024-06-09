@@ -9,7 +9,7 @@ interface PaginationInterface
 
     public function getEntriesTo(): int;
 
-    public function getTotal(): int;
+    public function getTotalEntries(): int;
 
     public function getTotalPages(): int;
 

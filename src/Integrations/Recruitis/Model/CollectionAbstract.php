@@ -12,16 +12,13 @@ abstract class CollectionAbstract implements PaginationInterface
     protected array $items = [];
 
     #[SerializedPath("[meta][entries_total]")]
-    protected int $total;
-
-    /* must be set manually - [meta][entries_sum] is not this value */
-    protected int $showPerPage;
+    protected int $totalEntries = 0;
 
     #[SerializedPath("[meta][entries_from]")]
-    protected int $entriesFrom;
+    protected int $entriesFrom = 0;
 
     #[SerializedPath("[meta][entries_to]")]
-    protected int $entriesTo;
+    protected int $entriesTo = 0;
 
     /*
      * A @return phpdoc definition has to be added to the child class for serializer to recognize correct item class
@@ -37,26 +34,21 @@ abstract class CollectionAbstract implements PaginationInterface
     }
 
 
-    public function getTotal(): int
+    public function getTotalEntries(): int
     {
-        return $this->total;
+        return $this->totalEntries;
     }
 
-    public function setTotal(int $total): static
+    public function setTotalEntries(int $totalEntries): static
     {
-        $this->total = $total;
+        $this->totalEntries = $totalEntries;
         return $this;
     }
 
     public function getShowPerPage(): int
     {
-        return $this->showPerPage;
-    }
-
-    public function setShowPerPage(int $showPerPage): static
-    {
-        $this->showPerPage = $showPerPage;
-        return $this;
+        $entries = $this->getEntriesTo() - $this->getEntriesFrom()+1;
+        return max(1, $entries); // there can not be 0 entries per page, it would throw division by zero error
     }
 
     public function getEntriesFrom(): int
@@ -83,12 +75,12 @@ abstract class CollectionAbstract implements PaginationInterface
 
     public function getTotalPages(): int
     {
-        return (int)ceil($this->total / $this->showPerPage);
+        return (int)ceil($this->totalEntries / $this->getShowPerPage());
     }
 
     public function getCurrentPage(): int
     {
-        return (int)ceil($this->entriesFrom / $this->showPerPage);
+        return (int)ceil($this->entriesFrom / $this->getShowPerPage());
     }
 
     public function isFirstPage(): bool
