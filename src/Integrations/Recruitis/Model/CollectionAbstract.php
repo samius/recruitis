@@ -47,7 +47,7 @@ abstract class CollectionAbstract implements PaginationInterface
 
     public function getShowPerPage(): int
     {
-        $entries = $this->getEntriesTo() - $this->getEntriesFrom()+1;
+        $entries = $this->getEntriesTo() - $this->getEntriesFrom() + 1;
         return max(1, $entries); // there can not be 0 entries per page, it would throw division by zero error
     }
 
