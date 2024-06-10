@@ -6,6 +6,7 @@ namespace App\Integrations\Recruitis\Model;
 class EnumItem
 {
     private int $id;
+
     private string $name;
 
     public function getId(): int

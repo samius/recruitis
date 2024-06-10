@@ -18,5 +18,6 @@ interface PaginationInterface
     public function getCurrentPage(): int;
 
     public function isFirstPage(): bool;
+
     public function isLastPage(): bool;
 }

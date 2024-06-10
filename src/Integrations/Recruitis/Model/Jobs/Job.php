@@ -6,6 +6,7 @@ namespace App\Integrations\Recruitis\Model\Jobs;
 use App\Integrations\Recruitis\Model\EnumItem;
 use App\Integrations\Recruitis\Model\Jobs\Job\Address;
 use App\Integrations\Recruitis\Model\Jobs\Job\Salary;
+use DateTimeImmutable;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 use Symfony\Component\Serializer\Attribute\SerializedPath;
 
@@ -21,7 +22,7 @@ class Job
     private string $description;
 
     #[SerializedName('date_created')]
-    private \DateTimeImmutable $dateCreated;
+    private DateTimeImmutable $dateCreated;
 
     private Salary $salary;
 
@@ -81,12 +82,12 @@ class Job
         return $this;
     }
 
-    public function getDateCreated(): \DateTimeImmutable
+    public function getDateCreated(): DateTimeImmutable
     {
         return $this->dateCreated;
     }
 
-    public function setDateCreated(\DateTimeImmutable $dateCreated): Job
+    public function setDateCreated(DateTimeImmutable $dateCreated): Job
     {
         $this->dateCreated = $dateCreated;
         return $this;

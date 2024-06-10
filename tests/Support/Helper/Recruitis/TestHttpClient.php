@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Tests\Support\Helper\Recruitis;
 
 use Codeception\Stub;
+use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -65,21 +66,21 @@ class TestHttpClient implements ClientInterface
 
     public function send(RequestInterface $request, array $options = []): ResponseInterface
     {
-        throw new \Exception('Not implemented');
+        throw new Exception('Not implemented');
     }
 
     public function sendAsync(RequestInterface $request, array $options = []): PromiseInterface
     {
-        throw new \Exception('Not implemented');
+        throw new Exception('Not implemented');
     }
 
     public function requestAsync(string $method, $uri, array $options = []): PromiseInterface
     {
-        throw new \Exception('Not implemented');
+        throw new Exception('Not implemented');
     }
 
     public function getConfig(string $option = null)
     {
-        throw new \Exception('Not implemented');
+        throw new Exception('Not implemented');
     }
 }

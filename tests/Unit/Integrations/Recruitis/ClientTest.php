@@ -10,6 +10,7 @@ use App\Tests\Support\Helper\Recruitis\TestHttpClient;
 use App\Tests\Support\UnitTester;
 use Codeception\Test\Unit;
 use DateTimeImmutable;
+use DateTimeZone;
 
 class ClientTest extends Unit
 {
@@ -36,7 +37,7 @@ class ClientTest extends Unit
 
         //make sure that datetime is in UTC
         $this->assertEquals(
-            (new DateTimeImmutable('2023-06-30T09:28:00', new \DateTimeZone('UTC')))->getTimestamp(),
+            (new DateTimeImmutable('2023-06-30T09:28:00', new DateTimeZone('UTC')))->getTimestamp(),
             $first->getDateCreated()->getTimestamp()
         );
 

@@ -30,6 +30,6 @@ class JobsController extends AbstractController
             $jobsCollection = new JobCollection();
         }
 
-        return $this->render('jobs/all.html.twig', ['jobs'=>$jobsCollection]);
+        return $this->render('jobs/all.html.twig', ['jobs' => $jobsCollection]);
     }
 }

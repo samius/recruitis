@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Integrations\Recruitis\Model\Jobs\Job;
+
 use Symfony\Component\Serializer\Attribute\SerializedName;
 
 class Salary
@@ -10,13 +11,19 @@ class Salary
 
     #[SerializedName('is_min_visible')]
     private bool $minVisible = false;
+
     private ?float $max = null;
+
     #[SerializedName('is_max_visible')]
     private bool $maxVisible = false;
+
     #[SerializedName('is_range')]
     private bool $isRange = false;
+
     private ?string $currency = null;
+
     private ?string $unit = null;
+
     private ?bool $visible = null;
 
     public function getMin(): ?float

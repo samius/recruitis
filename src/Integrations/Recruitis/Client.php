@@ -14,6 +14,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 class Client
 {
     public static string $BASE_URL = 'https://app.recruitis.io/api2/';
+
     private static int $CACHE_EXPIRE = 60;
 
     public function __construct(private readonly string $apiToken, private readonly ClientInterface $httpClient, private readonly SerializerInterface $serializer, private readonly CacheInterface $cache)
@@ -28,8 +29,6 @@ class Client
     }
 
 
-
-
     private function get(string $path, array $query): string
     {
         return $this->getCachedResult('GET', $path, [RequestOptions::QUERY => $query]);
@@ -39,11 +38,11 @@ class Client
     {
         $cacheKey = $this->getCacheKey($method, $path, $config);
 
-        return $this->cache->get (
+        return $this->cache->get(
             $cacheKey, function (CacheItemInterface $cacheItem) use ($method, $path, $config) {
-                $cacheItem->expiresAfter(self::$CACHE_EXPIRE);
-                return $this->sendRequest($method, $path, $config);
-            }
+            $cacheItem->expiresAfter(self::$CACHE_EXPIRE);
+            return $this->sendRequest($method, $path, $config);
+        }
         );
     }
 
