@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Kariéra{% endblock %}
 {% block body %}
+    <div class="row header">
+        <h1>Nábor nových klonů ve firmě <span class="company-name">ICA - International Contract Agency</span></h1>
+    </div>
     <div class="row">
-        <div class="col-md-12 wrapper">
-            <h1>Pozice ve firmě International Contract Agency</h1>
-            <small class="text-muted">Zobrazeno {{ jobs.entriesFrom}} až {{ jobs.entriesTo }} inzerátů z {{ jobs.totalEntries}}</small>
+        <div class="col-md-12">
+            <small class="text-muted text-right">Zobrazeno {{ jobs.entriesFrom}} až {{ jobs.entriesTo }} inzerátů z {{ jobs.totalEntries}}</small>
             <div class="list">
                 {% for job in jobs.items %}
                     {# @var \App\Integrations\Recruitis\DataObject\Jobs\Job job #}
@@ -19,9 +21,18 @@
                         {% if job.suitableForString %}
                             <span class="tag icon-tag">{{ job.suitableForString }}</span>
                         {% endif %}
-                        {% if job.salary is not null %}
-                            <span class="tag icon-salary">{{ job.salary.min|number_format }}&nbsp;&ndash;&nbsp;{{ job.salary.max|number_format }} {{ job.salary.currency }} / {{ job.salary.unit }}</span>
-                            <span class="tag icon-salary">{{ job.salary.min}}&nbsp;&ndash;&nbsp;{{ job.salary.max }} {{ job.salary.currency }} / {{ job.salary.unit }}</span>
+                        {% if job.salary is not null and job.salary.visible%}
+                            <span class="tag icon-salary">
+                            {% if job.salary.minVisible %}
+                                {{ job.salary.min|number_format }}
+                            {% endif %}
+                            {% if job.salary.minVisible and job.salary.maxVisible %}
+                                &nbsp;&ndash;&nbsp;
+                            {% endif %}
+                            {% if job.salary.maxVisible %}
+                                {{ job.salary.max|number_format }}
+                            {% endif %}
+                            {{ job.salary.currency }} / {{ job.salary.unit }}</span>
                         {% endif %}
                         {% if job.education is not null %}
                             <span class="tag icon-education">{{ job.education.name }}</span>
@@ -29,21 +40,18 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="paginator">
-                <nav>
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item{% if jobs.isFirstPage %} disabled{% endif %}">
-                        <a class="page-link"{% if not jobs.isFirstPage %} href="{{ path('jobs_all', {page: jobs.currentPage-1}) }}"{% endif %}>Předhozí</a>
-                    </li>
-                      {% for pageNum in 1..jobs.totalPages %}
-                          <li class="page-item {% if pageNum == jobs.currentPage %} active {% endif %}"><a class="page-link" href="{{ path('jobs_all', {'page':pageNum}) }}">{{ pageNum }}</a></li>
-                      {% endfor %}
-                    <li class="page-item{% if jobs.isLastPage %} disabled{% endif %}">
-                        <a class="page-link"{% if not jobs.isLastPage %} href="{{ path('jobs_all', {page: jobs.currentPage+1}) }}"{% endif %}>Další</a>
-                    </li>
-                  </ul>
-                </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% if jobs.items|length > 0 %}
+                    {% include 'pagination.html.twig' with { 'paginationInterface': jobs } %}
+                {% else %}
+                    <p>Žádné pozice nebyly nalezeny. Zkuste to na <a href="{{ path('jobs_all', {'page':1}) }}">první stránce</a></p>
+                {% endif %}
             </div>
+
         </div>
     </div>
 {% endblock %}
+
+

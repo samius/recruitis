@@ -1,0 +1,15 @@
+<div class="paginator">
+    <nav>
+      <ul class="pagination justify-content-center">
+        <li class="page-item{% if paginationInterface.isFirstPage %} disabled{% endif %}">
+            <a class="page-link"{% if not paginationInterface.isFirstPage %} href="{{ path('jobs_all', {page: paginationInterface.currentPage-1}) }}"{% endif %}>Předchozí</a>
+        </li>
+          {% for pageNum in 1..paginationInterface.totalPages %}
+              <li class="page-item {% if pageNum == paginationInterface.currentPage %} active {% endif %}"><a class="page-link" href="{{ path('jobs_all', {'page':pageNum}) }}">{{ pageNum }}</a></li>
+          {% endfor %}
+        <li class="page-item{% if paginationInterface.isLastPage %} disabled{% endif %}">
+            <a class="page-link"{% if not paginationInterface.isLastPage %} href="{{ path('jobs_all', {page: paginationInterface.currentPage+1}) }}"{% endif %}>Další</a>
+        </li>
+      </ul>
+    </nav>
+</div>

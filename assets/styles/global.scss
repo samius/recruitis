@@ -6,12 +6,20 @@
   src: url('~bootstrap-icons/font/fonts/bootstrap-icons.woff2') format('woff2'),
        url('~bootstrap-icons/font/fonts/bootstrap-icons.woff') format('woff');
 }
+.header {
+  h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    .company-name {
+        font-weight: bolder;
+    }
+  }
+}
 
 .container {
-  background-color: #B4BEC9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px 0px 10px 20px;
+  background-color: #DEEFE7;
+  margin: 10px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.wrapper {
-    background-color: #DEEFE7;
-}
-
