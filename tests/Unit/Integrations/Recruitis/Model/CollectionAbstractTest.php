@@ -46,18 +46,4 @@ class CollectionAbstractTest extends Unit
             $this->assertEquals($expectedShowPerPage, $collection->getShowPerPage());
         }
     }
-
-    public function testGetCurrentPage(): void
-    {
-        $collection = new TestCollection();
-    }
-
-
-    protected function _before(): void
-    {
-    }
-
-    protected function _after(): void
-    {
-    }
 }

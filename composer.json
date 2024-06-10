@@ -73,9 +73,9 @@
         }
     },
     "require-dev": {
-        "codeception/codeception": "^5.1",
-        "codeception/module-asserts": "^3.0",
-        "codeception/module-symfony": "^3.4",
+        "codeception/codeception": "*",
+        "codeception/module-asserts": "*",
+        "codeception/module-symfony": "*",
         "symfony/stopwatch": "6.4.*",
         "symfony/web-profiler-bundle": "6.4.*"
     }
