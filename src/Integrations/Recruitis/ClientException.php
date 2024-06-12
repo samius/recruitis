@@ -20,6 +20,7 @@ class ClientException extends Exception
     public static function createFromHttpCode(int $httpCode, string $fallbackMessage): ClientException
     {
         return match ($httpCode) {
+            0 => new self('Recruitis API not available. Try it later.', 0),
             404 => self::createNotFound(),
             401 => self::createUnauthorized(),
             408 => self::createTimeout(),

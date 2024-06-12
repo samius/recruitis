@@ -8,6 +8,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use Psr\Cache\CacheItemInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
@@ -16,8 +17,12 @@ class Client
     public static string $BASE_URL = 'https://app.recruitis.io/api2/';
 
     private static int $CACHE_EXPIRE = 60;
+    private static int $REQUEST_TIMEOUT = 10;
 
-    public function __construct(private readonly string $apiToken, private readonly ClientInterface $httpClient, private readonly SerializerInterface $serializer, private readonly CacheInterface $cache)
+    public function __construct(private readonly string $apiToken, private readonly ClientInterface $httpClient,
+                                private readonly SerializerInterface $serializer, private readonly CacheInterface $cache,
+                                private readonly LoggerInterface $logger
+    )
     {
     }
 
@@ -49,10 +54,12 @@ class Client
     private function sendRequest(string $method, string $path, array $config): string
     {
         $config['headers'] = $this->getRequestHeaders();
+        $config[RequestOptions::TIMEOUT] = self::$REQUEST_TIMEOUT;
 
         try {
             $response = $this->httpClient->request($method, self::$BASE_URL . $path, $config);
         } catch (GuzzleException $e) {
+            $this->logger->error($e->getMessage());
             throw ClientException::createFromHttpCode($e->getCode(), $e->getMessage());
         }
 
